@@ -1,0 +1,49 @@
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    border-top: 2px  #6c0399 solid;
+    box-shadow: 0 2px 7px 1px #ddd;
+    position: fixed;
+    background-attachment:fixed;
+}
+td i a{
+  text-decoration: none ;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+.icons .hover, .icons .hover1 {
+  visibility: hidden;
+  background-color: black;
+  color:white;
+  width:100px;
+  text-align: center;
+  position: absolute;
+  z-index: 1;
+}
+.hover, .hover1 {
+  margin-left: 40px;
+}
+.ok:hover .hover{
+  visibility: visible;
+}
+.no:hover .hover1{
+  visibility: visible;
+}
+.all-players{
+  width:100%;
+  margin-left: 16%;
+}
+h2{
+  font-size: 30px;
+}
+.icons .material-icons {
+  padding:0 5px;
+}
+.icons{
+  margin-left: 0px;
+}

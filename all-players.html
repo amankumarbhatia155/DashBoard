@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+     <meta name="viewport" content="target-densitydpi=device-dpi, initial-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" type="text/css"href="https://fonts.googleapis.com/css?family=Quicksand">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    
+      <link rel="stylesheet" type="text/css" href="grid.css">
+    <title></title>
+
+
+
+  </head>
+  <body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title">PLAYER SELECTION</span>
+      <!-- Add spacer, to align navigation to the right -->
+      <div class="mdl-layout-spacer"></div>
+      <!-- Navigation. We hide it in small screens. -->
+      <!--nav class="mdl-navigation mdl-layout--large-screen-only">
+        <a class="mdl-navigation__link" href="">Link</a>
+        <a class="mdl-navigation__link" href="">Link</a>
+        <a class="mdl-navigation__link" href="">Link</a>
+        <a class="mdl-navigation__link" href="">Link</a>
+      </nav-->
+    </div>
+  </header>
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">SELECTION MANAGEMENT</span>
+    <nav class="mdl-navigation">
+      <a class="mdl-navigation__link" href="/index">Dashboard</a>
+      <a class="mdl-navigation__link" href="/process">All Players</a>
+      <a class="mdl-navigation__link" href="/shortplay">Shortlisted Players</a>
+      <a class="mdl-navigation__link" href="/verifyplay">Verified Players </a>
+        <a class="mdl-navigation__link" href="/trialplay">Trialed Players</a>
+      <a class="mdl-navigation__link" href="/selectplay">Selected Players </a>
+      <a class="mdl-navigation__link" href="/rejectplay">Rejected Players</a>
+    </nav>
+  </div>
+  <main class="mdl-layout__content">
+
+    <section class="all-players">
+      <div class="all-container">
+        <h2>ALL PLAYERS</h2>
+      <div class="row">
+      <table class="col-sm-12 col-xs-12" id="mytable">
+      <thead>  <tr>
+                       <th>Name</th>
+                       <th>Gender</th>
+                       <th>Age</th>
+                       <th>Location</th>
+                       <th>Applied_as</th>
+		       <th>Style</th>
+		       <th>Applied_on</th>
+		       <th>Action</th>
+
+        </tr></thead>
+        <tbody>
+         {{ range . }}
+        <tr><form  method="POST">
+                        <td name="MyTable" id="name" class="nam" ><input type="hidden" name="value_1" value={{.Name}} id="nameid">{{ .Name }}</td>
+                        <td name="MyTable" id="gender" class="gen"><input type="hidden" name="value_2" value={{.Gender}} id="genderid">{{.Gender}}</td>
+			<td name="MyTable" id="age" class="ag"><input type="hidden" name="value_3" value={{.Age}} id="ageid">{{.Age}}</td>
+			<td name="MyTable" id="location" class="loc"><input type="hidden" name="value_4" value={{.Location}} id="locationid">{{ .Location }}</td>
+                        <td name="MyTable" id="applyas" class="apas"><input type="hidden" name="value_5" value={{.Applied_as}} id="applied_asid">{{ .Applied_as}}</td>
+                        <td name="MyTable" id="style" class="sty"><input type="hidden" name="value_6" value={{.Style}} id="styleid">{{ .Style}}</td>
+			<td name="MyTable" id="applyon" class="apon"><input type="hidden" name="value_7" value={{.Applied_on}} id="applied_onid">{{ .Applied_on}}</td>
+                        
+            <td>
+            <div id="fromserver" class="icons">
+          <button class="btn1" ><i class="material-icons ok"><span class="hover">Verify</span>
+         done_all </i></button>
+
+    
+            <button class="btn2" ><i class="material-icons no"><span class ="hover1">reject</span>
+         highlight_off 
+          </i></button>
+        </div></td>
+  
+        </form>
+
+        
+
+        </tr>
+       {{ end }}
+       </tbody>
+      </table>
+    </div>
+    </div>
+  </main>
+</div>
+  </body>
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+   <script>  
+      $(".btn1").click( function()
+           {  var xmlhttp;
+             
+    var name = $(this).closest("tr")  
+                       .find(".nam")     
+                       .text();
+    
+    var age = $(this).closest("tr")  
+                       .find(".ag")     
+                       .text(); 
+    var gender = $(this).closest("tr")  
+                       .find(".gen")     
+                       .text(); 
+    var location=$(this).closest("tr")  
+                       .find(".loc")     
+                       .text(); 
+    var applied_as=$(this).closest("tr")  
+                       .find(".apas")     
+                       .text(); 
+     var style=$(this).closest("tr")  
+                       .find(".sty")     
+                       .text(); 
+     var applied_on=$(this).closest("tr")  
+                       .find(".apon")     
+                       .text(); 
+             
+     var values={};
+    values.name=name;
+    values.age=age;
+    values.gender=gender;
+    values.location=location;
+    values.applied_as=applied_as;
+    values.style=style;
+    values.applied_on=applied_on;
+
+    xmlhttp=new XMLHttpRequest();
+    xmlhttp.onreadystatechange=function()
+    {
+	if (xmlhttp.readyState==4 && xmlhttp.status==200)
+	{
+	    document.getElementById("fromserver").innerHTML=xmlhttp.responseText;
+	}
+    }
+   $.post("/verify",{name:name,age:age,gender:gender,location:location,applied_as:applied_as,style:style,applied_on:applied_on},function(data){
+						$("#result").html(data);
+					})
+    alert("verify");
+
+SomeDeleteRowFunction1(this);
+
+       });
+
+   function SomeDeleteRowFunction1(btndel) {
+    if (typeof(btndel) == "object") {
+        $(btndel).closest("tr").remove();
+    } else {
+        return false;
+    }
+}
+
+
+
+
+
+     $(".btn2").click( function()
+           {  var xmlhttp;
+             
+    var name = $(this).closest("tr")  
+                       .find(".nam")     
+                       .text();
+    var sval=$(this).closest("tr")  
+                       .find(".ag")     
+                       .text();
+    var age=parseInt(sval);
+    
+    /*var age = $(this).closest("tr")  
+                       .find(".ag")     
+                       .text();*/ 
+    var gender = $(this).closest("tr")  
+                       .find(".gen")     
+                       .text(); 
+    var location=$(this).closest("tr")  
+                       .find(".loc")     
+                       .text(); 
+    var applied_as=$(this).closest("tr")  
+                       .find(".apas")     
+                       .text(); 
+     var style=$(this).closest("tr")  
+                       .find(".sty")     
+                       .text(); 
+     var applied_on=$(this).closest("tr")  
+                       .find(".apon")     
+                       .text(); 
+             
+    var values={};
+    values.name=name;
+    values.age=age;
+    values.gender=gender;
+    values.location=location;
+    values.applied_as=applied_as;
+    values.style=style;
+    values.applied_on=applied_on;
+
+    xmlhttp=new XMLHttpRequest();
+    xmlhttp.onreadystatechange=function()
+    {
+	if (xmlhttp.readyState==4 && xmlhttp.status==200)
+	{
+	    document.getElementById("fromserver").innerHTML=xmlhttp.responseText;
+	}
+    }
+   $.post("/reject",{name:name,age:age,gender:gender,location:location,applied_as:applied_as,style:style,applied_on:applied_on},function(data){
+						$("#result").html(data);
+					})
+    alert("rejected");
+
+SomeDeleteRowFunction2(this);
+    
+       });
+
+   
+
+function SomeDeleteRowFunction2(btndel) {
+    if (typeof(btndel) == "object") {
+        $(btndel).closest("tr").remove();
+    } else {
+        return false;
+    }
+}
+
+
+</script>
+
+</html>
+
+
+
+<style>
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 90%;
+    border-top: 2px  #6c0399 solid;
+    box-shadow: 0 2px 7px 1px #ddd;
+}
+td i a{
+  text-decoration: none ;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+
+.btn1{
+background:transparent;
+border:3px solid #fff;
+}
+
+.btn2{
+background:transparent;
+border:3px solid #fff;
+}
+.icons .hover, .icons .hover1 {
+  visibility: hidden;
+  background-color: black;
+  color:white;
+  width:100px;
+  text-align: center;
+  position: absolute;
+  z-index: 1;
+}
+.hover, .hover1 {
+  margin-left: 40px;
+}
+.ok:hover .hover{
+  visibility: visible;
+}
+.no:hover .hover1{
+  visibility: visible;
+}
+.all-players{
+width:100%;
+background-attachment:local;
+margin-left:5%;
+position:absolute;
+left:0px;
+right:0;
+top:0;
+bottom:0;
+  
+}
+h2{
+  font-size: 30px;
+}
+.icons .material-icons {
+  padding:0 5px;
+}
+.icons{
+  margin-left: 0px;
+}
+</style>

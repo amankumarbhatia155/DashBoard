@@ -1,0 +1,125 @@
+body{
+  font-family: 'Quicksand',sans-serif;
+  width:100% ;
+}
+ .side-color{
+width:50px;
+background-color: #7aadff;
+height: 50px;
+}
+.side-color p{
+margin-left: 10px;
+margin-top: 50px;
+}
+
+.this-week, .last-week, .total, .this-month{
+  width:200px;
+  background-color: #641F9E;
+  height: auto;
+  box-shadow: 0 2px 7px 1px  #b5b5b5;
+}
+.this-week p, .last-week p, .total p, .this-month p {
+margin-top:10px;
+
+}
+.container{
+  width:85%;
+margin-top: 2%;
+margin-left:15%;
+  background-color: white;
+}
+.container p{
+  font-weight: bold;
+  color:white;
+  font-size: 20px;
+}
+.col-sm-3 {
+  margin: 0 10px 0 10px;
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    border-top: 2px  #6c0399 solid;
+    box-shadow: 0 2px 7px 1px #ddd;
+}
+td i a{
+  text-decoration: none ;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+.icons .material-icons {
+  padding:0 5px;
+}
+.icons{
+  margin-left: 20px;
+}
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+.right-side-column{
+  margin-top:-10px;
+}
+
+.right-side-column p{
+  color:white;
+text-align: center;
+}
+.first-element,.second-element, .third-element, .fourth-element{
+  background-color:  #fff;
+  width:auto;
+height:100px;
+margin: 10px 0 10px 0;
+border: 1.5px solid #6c0399;
+opacity: .8;
+box-shadow: 0 2px 7px 1px  #6c0399;
+}
+.element-logo{
+  width:80px;
+  height:60px;
+  background-color: #7aadff;
+margin-left: 100px;
+margin-top: -5px;
+}
+.element-logo  p {
+  position: relative;
+top:20px;
+  font-weight: bold;
+  font-size: 20px;
+}
+.entry-container{
+  margin-left: 17%;
+  margin-top: 3%;
+}
+.first-element p,.second-element p, .third-element p, .fourth-element p{
+  font-weight: bold;
+  font-size: 20px;
+  color:black;
+  margin-top: 5px;
+}
+h2{
+  font-size: 30px;
+  margin-left: -19px;
+}
+.latest-trial{
+  margin-top: -150px;
+}
+.icons .hover, .icons .hover1 {
+  visibility: hidden;
+  background-color: black;
+  color:white;
+  width:100px;
+  text-align: center;
+  position: absolute;
+  z-index: 1;
+}
+.ok:hover .hover{
+  visibility: visible;
+}
+.no:hover .hover1{
+  visibility: visible;
+}
